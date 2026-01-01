@@ -1,0 +1,159 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+
+\newcommand{\arr}[1]{\xrightarrow{#1}}
+\newcommand{\diag}[1]{%
+  \begin{center}
+  \begin{tikzcd}[ampersand replacement=\&]
+    #1
+  \end{tikzcd}
+  \end{center}
+}
+\newcommand{\cat}[1]{\mathbf{#1}}
+\newcommand{\catt}[1]{\textbf{#1}}
+\title{Category and Sheaf Theory}
+\author{JENS LUNDSGAARD}
+\date{December 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Arrow Categories}
+Given a category $\cat{C}$, we define the arrow category $\cat{C}^{\rightarrow}$ as follows: 
+\begin{itemize}
+    \item The objects of $\cat{C}^{\rightarrow}$ are the morphisms
+    $$A \arr{f} B$$
+    for all objects $A, B$ of $\cat{C}$.
+    \item A morphism from $A \arr{f} B$ to $A' \xrightarrow{f'} B$ is the pair of morphisms $(A \arr{a} A', B \arr{b} B')$ in $\cat{C}$ s.t. the following diagram commutes:
+    \diag{
+        A \arrow[d, "f"] \arrow[r, "a"] \& A' \arrow[d, "f'"]\\
+        B \arrow[r, "b"] \& B'
+    }
+    \item Composition of morphisms is defined as $(a,b) \circ (a', b') = (a \circ a', b \circ b')$ i.e. the following diagram commutes:
+    \diag{
+        A \arrow[d, "f"] \arrow[r, "a"] \& A' \arrow[d, "f'"] \arrow[r, "a'"] \& A'' \arrow[d, "f''"]\\
+        B \arrow[r, "b"] \& B' \arrow[r, "b'"] \& B''
+    }
+    \item The identity morphism is simply $(\text{id}_A, \text{id}_B)$.
+\end{itemize}
+\section{Natural Transformations}
+Given two functors $F, G$ from $\cat{A}$ to $\cat{B}$, a natural transformation $\mu$ from $F$ to $G$ is a collection of morphisms $\{\mu X\}_{X \in \text{ob}(\cat{A})}$ in $\cat{B}$ s.t. for every morphism $X \arr{f} Y \in \cat{A}$, the following diagram commutes:
+\diag{
+	F(X) \arrow[d, "F(f)"] \arrow[r, "\mu X"] \& G(X) \arrow[d, "G(f)"] \\
+	F(Y) \arrow[r, "\mu Y"] \& G(Y)
+} 
+
+\section{Comma Categories}
+Given two functors $F$ from $\cat{A}$ and $G$ from $\cat{B}$ sharing a common codomain $\cat{C}$, the comma category $(F \downarrow G)$ is defined as follows:
+\begin{itemize}
+	\item The objects are triples $(A, B, f)$ where $A \in \text{ob}(\cat{A})$, $B \in \text{ob}(\cat{B})$ and $F(A) \arr{f} G(B)$ is a morphism in $\cat{C}$. 
+	\item A morphism from $(A, B, f)$ to $(A', B', f')$ is the pair $(a,b)$ where $A \arr{a} A'$, $B \arr{b} B'$ s.t. the following diagram commutes:
+\diag{
+	F(A) \arrow[d, "f"] \arrow[r, "F(a)"] \& F(A') \arrow[d, "f'"] \\
+	G(B) \arrow[r, "G(b)"] \& G(B')
+}
+	\item Composition of morphisms is as you would expect. 
+\end{itemize}
+
+\section{Slice and Co-Slice Categories}
+Given a category $\cat{C}$ and an object $A$ of that category, we can define the slice and co-slice categories $(\cat{C} \downarrow A)$ and $(A \downarrow \cat{C})$. These categories are defined as follows:
+\begin{itemize}
+    \item An object of the slice (resp. co-slice) category is of the form $(B,f)$ for an object $B$ of $\cat{C}$ and a morphism $A \arr{f} B$ (resp. $B \arr{f} A$).
+    \item A morphism of the slice (resp. co-slice) category is of the form $(B,f) \arr{g} (B', f')$ where $B \arr{g} B'$ is a morphism in $\cat{C}$ s.t. the following triangle commutes:
+    \diag{
+    B \arrow[r, "g"] \arrow[rd, "f"] \& B' \arrow[d, "f'"] \\
+    \& A
+    }
+    \begin{center} resp. \end{center}
+    \diag{
+     
+    \& A \\
+    B \arrow[r, "g"] \arrow[ur, "f"] \& B' \arrow[u, "f'"] 
+    }
+    \item Composition is simply composition of underlying morphisms, i.e. $A \arr{g} B$ (resp. $B \arr{g} A$) in the example above.
+\end{itemize}
+
+\section{Full Subcategories}
+If $\cat{C}$ is a category and $\cat{D}$ a subcategory of $\cat{C}$, then $\cat{D}$ is said to be a full subcategory if 
+$$\text{Hom}_\cat{D}(A,B) = \text{Hom}_\cat{C}(A,B)$$
+for all objects $A,B$ of $\cat{D}$.
+
+\section{Presheaf}
+Assume $\cat{C}$ is small. A (set-valued) presheaf is a functor $F:\cat{C}^{op} \to \catt{Set}$.
+
+\section{Category of Cones and Limits}
+Given a category $\cat{C}$ and a diagram $F: \cat{J} \to \cat{C}$, then the category of cones is $(\Delta \downarrow F)$ where $\Delta: \cat{C} \to \cat{C}^\cat{J}$ maps the object $X$ to the constant functor from $J$ to $X$ and $F$ represents the map from the terminal category, selecting simply $F$ in $\cat{C}^\cat{J}$. Now by definition, the objects will be the triples $(X, F, \mu)$ where $X$ is a constant functor from $J$ to some $X \in \text{ob}(\cat{C})$, $F$ is the diagram from before, and $\mu$ is a morphism between them in $\cat{C}^\cat{J}$ i.e. a natural transformation. Since the second componet of an object is always $F$, I will simply write $(X, \mu)$ from here on out. To visualize this cone object, consider the following diagram representing the natural transformation between $X$ and $F$:
+\diag{
+X
+\arrow[drr, bend left, "\mu C_1"]
+\arrow[ddr, bend right, "\mu C_3"]
+\arrow[dr, "\mu C_2"] \& \& \\
+\&  J_1 \arrow[r, "j"] \arrow[d, "i"] \& J_2 \arrow[d, ""] \\
+\& J_3 \arrow[r, ""] \& \ddots
+}
+The triangular shape of this diagram is where the name cone comes from. Essentially every object in this category is just a natural transformation from $X$ (constant functor) to $F$ and this essentially measures compatability of an objects morphisms to the image of the diagram $F$. 
+
+Given two object $(Y, \mu_1)$ and $(Z, \mu_2)$, a morphism between them will be two morphisms $f, \iota$ (natural transformations in $\cat{C}^\cat{J}$) s.t. the following diagram commutes:
+ \diag{
+	\Delta (Y) \arrow[d, "\mu_1"] \arrow[r, "f"] \& \Delta (Z) \arrow[d, "\mu_2"] \\
+	F \arrow[r, "\iota"] \& F
+}
+Now we see the real structure of this category: $f$ will simply be a natural transformation between the constant functors $Y$ and $Y$, and $\iota$ is simply a natural transformation from $F$ to $F$. If $\iota$ is the identity morphism of $F$ then the diagram simplifies to the following:
+ \diag{
+	\Delta (Y) \arrow[dr, "\mu_1"] \arrow[r, "f"] \& \Delta (Z) \arrow[d, "\mu_2"] \\
+	\& F
+}
+So we can relate $(Y, \mu_1)$ to $(Z, \mu_2)$ if $\mu_1$ factors into $\mu_2 \circ f$! To elaborate more on the underlying structure of $f$, remember that a natural transformation is set of morphisms (here $\{f J\}$) indexed by elements of the domain category (here $\cat{J}$), and the commutative diagram for $f$ from $Y$ to $Z$ is as follows:
+
+\diag{
+	Y(I) \arrow[d, "Y(g)"] \arrow[r, "f I"] \& Z(I) \arrow[d, "Z(g)"] \\
+	Y(K) \arrow[r, "f K"] \& Z(K)
+}
+where $I$ and $K$ are objects of $\cat{J}$ and $g$ is a morphism between them. This choice does not matter though, as $Y$ and $Z$ are constant functors, thus the simplified diagram is as follows:
+\diag{
+	Y \arrow[d, "\text{id}_Y"] \arrow[r, "f I"] \& Z \arrow[d, "\text{id}_Z"] \\
+	Y \arrow[r, "f K"] \& Z
+}
+$fK \circ \text{id}_Y = \text{id}_Z \circ fI$ implies that $fK = fI$ thus $f$ is just a single morphism from $Y$ to $Z$! (hence my choice of variable name) 
+
+Now we see the underlying structure of the cone category; its objects represent the ways we can "map" from an object $X$ to the diagram $F$ while maintaining the structure of $\cat{C}$, its morphisms represent the objects ability to factor through each other towards the diagram $F$.
+
+The result of this is that a limit of a diagram is just a terminal object in this category of cones. Which makes sense; if $(X, \mu)$ is a terminal object in this category, then it represents a commutative mapping of morphisms from $X$ to the diagram, through which every other object in $\cat{C}$ must uniquely factor (if there is some natural transformation from it to the diagram). 
+
+\section{Sheaves}
+A sheaf, from a less general, more set-theoretic standpoint is a presheaf $F:\mathcal{O}(X)^\text{op} \to \catt{Set}$, where $(X, \mathcal{T})$ is some topological space, $\mathcal{O}(X)$ is the poset category of open sets in $X$ by subsets, with some specific properties, which we will cover shortly. In this less general case, the inclusion of $V$ in $U$ maps to a restriction map from $F(U)$ to $F(V)$, but we will generalize this later. Now we cover some important terminology and notation:
+\begin{itemize}
+	\item For an open set $U$, $F(U)$ is said to be the set of sections over $U$.
+	\item Let $U, V$ be open sets with $V \subset U$. While the map from $F(U)$ to $F(V)$ is usually called $\rho^U_V$, we notate the image of the section $s \in F(U)$ in $\rho^U_V$ as $s\vert_V$. 
+	\item If we have an open cover $\{V_\alpha\}$ of $U$, for $U$ an open set and $s, t \in F(U)$ then if $s\vert_{V_\beta} = t\vert_{V_\beta}$ for all $V_\beta$ in the cover $\{V_\alpha\}$ implies that $s = t$, then we say \textbf{the sheaf axiom of locality} holds.
+	\item Again given the open cover $\{V_\alpha\}$ of $U$ and a set of sections $\{s_\alpha\}$ indexed by the open cover $\{V_\alpha\}$ (i.e. $s_\alpha \in F(V_\alpha)$), then if $s_\beta\vert_{V_\beta \cap V_\delta} = s_\delta\vert_{V_\beta \cap V_\delta}$ holding for all $V_\beta, V_\delta$ in the open cover implies the existence of a unique section $s \in F(U)$ s.t. $s\vert_{V_\gamma} = s_\gamma$ for all $V_\gamma$ in $\{V_\alpha\}$, then we say \textbf{the sheaf axiom of gluing} holds. 
+\end{itemize}
+Now a sheaf (under this definition) is a presheaf for which both sheaf axioms hold.
+
+\section{Sheaf Codomain Generalization}
+Now we describe the two properties given in terms of sets in terms of categories, that way we can define sheaves with more general codomains, specifically any category that has small (set-indexed) products. Specifically, if we have an $A$ indexed family of open sets $U_\alpha \subset U$ for $\alpha \in A$ and $U$ is the colimit of the diagram $D$ containing all $U_\alpha$ with the following inclusions:
+\diag{
+	U_\beta \& \arrow[l] U_\beta \cap U_\delta \arrow[r]\& U_\delta 
+}
+then $U$ is said to be covered by $\{U_\alpha\}$, (hinting at a generalisation of the domain), then a presheaf $F$ is a sheaf if $F(U)$ is the limit of $F \circ D$. We will make this definition more clear but first let's understand why in the special case of $\catt{Set}$, this implies the two sheaf axioms (in fact, for set valued presheaves, they are equivalent, but I won't prove the converse yet):
+\begin{itemize}
+	\item Recall that locality means that any two sections $s, t$ over $U$ are equal if they restrict to the same section over every $U_\alpha$. Take these to be the morphisms $s,t: 1 \to F(U)$, where $1$ is the terminal category. Now for any $U_\alpha$, $\rho_{U_\alpha}^U \circ s = \rho_{U_\alpha}^U \circ t$ by definition of $s,t$, by assumption $F(U)$ is the limit of $F \circ D$ so any morphism to $F(U_\alpha)$ must uniquely factor through it thus $s = t$.
+	\item Gluing states that for a set of sections $s_\alpha$ over $U_\alpha$ respectively s.t. any two sections restrict to the same section in the intersection of the open sets they are over. Given this, again we look at the morphisms $s_\alpha: 1 \to U_\alpha$. The agreement between intersections means that for any $s_\beta, s_\delta$, $\rho_{U_\beta \cap U_\delta}^{U_\beta} \circ s_\beta = \rho_{U_\beta \cap U_\delta}^{U_\delta} \circ s_\delta$ and by the limit assumption, this must factor uniquely into $\rho_{U_\beta \cap U_\delta}^U \circ s$. We can intersect open sets together here and just prepend that to any differing $s$, and use the limit property to show $s$ is the unique section we are looking for. It just remains to show that $\rho_{U_\gamma}^U \circ s = s_\gamma$; indeed, this is clear from how we found $s$; it's just the factorization through $F(U)$ of $s_\gamma$.
+\end{itemize} 
+A more compressed version of this is that if $U$ is the covered set from before, then $F$ is a sheaf if the following diagram commutes:
+\diag{
+	F(U) \arrow[r, "e"] \& \Pi_{\alpha \in A} F(U_\alpha) \arrow[r, shift left, "p"] \arrow[r,shift right, swap, "q"] \& \Pi_{\beta, \delta \in A} F(U_\beta \cap U_\delta)
+}
+in $\cat{Set}$ s.t. $e$ is product of the functions $\rho_{U_\alpha}^U$, $p$ has the action $(s_\alpha)_{\alpha \in A} \mapsto (s_\alpha \vert_{U_\alpha \cap U_\beta})_{\alpha, \beta \in A}$ and $q$ has the action $(t_\alpha)_{\alpha \in A} \mapsto (t_\beta \vert_{U_\alpha \cap U_\beta})_{\alpha, \beta \in A}$. Since morphisms to components uniquely decompose through products, we can now write our more general definiton of a sheaf.
+
+Let $F: \mathcal{O}(X)^\text{op} \to \cat{D}$ be a contravariant functor from the poset of open sets in a topological space $X$ to the category with small products $\cat{C}$. Let $U$ be an open set with an open cover $\{U_\alpha\}$ by the colimit definition. Then $F$ is a sheaf if for all $\alpha, \beta \in A$, the following diagram commutes:
+\diag{
+\& F(U_\alpha) \arrow[r, "\rho_{U_\alpha \cap U_\beta}^{U_\alpha}"]\& F(U_\alpha \cap U_\beta) \\
+F(U) \arrow[ur] \arrow[dr] \arrow[r, "e", densely dotted] \& \Pi_{\delta \in A} F(U_\delta) \arrow[r, shift left, densely dotted, "p"] \arrow[r, swap, shift right, densely dotted, "q"] \arrow[u] \arrow[d] \& \Pi_{\delta, \gamma \in A} F(U_\delta \cap U_\gamma) \arrow[d] \arrow[u]\\
+\& F(U_\beta) \arrow[r, "\rho_{U_\alpha \cap U_\beta}^{U_\beta}"]\& F(U_\alpha \cap U_\beta) 
+}
+\end{document}
