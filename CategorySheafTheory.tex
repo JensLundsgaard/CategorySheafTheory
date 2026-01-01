@@ -156,4 +156,8 @@ Let $F: \mathcal{O}(X)^\text{op} \to \cat{D}$ be a contravariant functor from th
 F(U) \arrow[ur] \arrow[dr] \arrow[r, "e", densely dotted] \& \Pi_{\delta \in A} F(U_\delta) \arrow[r, shift left, densely dotted, "p"] \arrow[r, swap, shift right, densely dotted, "q"] \arrow[u] \arrow[d] \& \Pi_{\delta, \gamma \in A} F(U_\delta \cap U_\gamma) \arrow[d] \arrow[u]\\
 \& F(U_\beta) \arrow[r, "\rho_{U_\alpha \cap U_\beta}^{U_\beta}"]\& F(U_\alpha \cap U_\beta) 
 }
+\section{Hom-Functors and Representation}
+Given a locally small category $\cat{C}$ and $c \in \text{ob}(\cat{C})$, then the covariant functor $\text{Hom}(c,-): \cat{C} \to \catt{Set}$ is called a hom-functor and takes $x \in \text{ob}(\cat{C})$ to the set $\text{Hom}(c, x)$ or the set of morphisms from $c$ to $x$. Each morphism $a \arr{f} b$ is mapped to the function $\text{Hom}(c,f) : \text{Hom}(c,a) \to \text{Hom}(c,b)$ having the effect $c \arr{h} a \mapsto c \arr{f \circ g} b$. The contravariant hom-functor $\text{Hom}(-, c): \cat{C}^\text{op} \to \catt{Set}$ is the dual of this notion.
+
+A covariant functor $F: \cat{C} \to \catt{Set}$ is said to be representable if there exists $c \in \text{op}(\cat{C})$ s.t. $\text{Hom}(c, -)$ is naturally isomorphic to $F$. If $F$ is contravariant then we require $F$ to be naturally isomorphic to $\text{Hom}(-,c)$.  
 \end{document}
