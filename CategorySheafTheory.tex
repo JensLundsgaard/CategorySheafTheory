@@ -3,7 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{tikz-cd}
-
+\usepackage{hyperref}
 \newcommand{\arr}[1]{\xrightarrow{#1}}
 \newcommand{\diag}[1]{%
   \begin{center}
@@ -22,7 +22,7 @@
 
 \maketitle
 
-\section{Arrow Categories}
+\section{Arrow Categories} \label{arrow_categories}
 Given a category $\cat{C}$, we define the arrow category $\cat{C}^{\rightarrow}$ as follows: 
 \begin{itemize}
     \item The objects of $\cat{C}^{\rightarrow}$ are the morphisms
@@ -40,14 +40,14 @@ Given a category $\cat{C}$, we define the arrow category $\cat{C}^{\rightarrow}$
     }
     \item The identity morphism is simply $(\text{id}_A, \text{id}_B)$.
 \end{itemize}
-\section{Natural Transformations}
+\section{Natural Transformations} \label{natural_transformations}
 Given two functors $F, G$ from $\cat{A}$ to $\cat{B}$, a natural transformation $\mu$ from $F$ to $G$ is a collection of morphisms $\{\mu X\}_{X \in \text{ob}(\cat{A})}$ in $\cat{B}$ s.t. for every morphism $X \arr{f} Y \in \cat{A}$, the following diagram commutes:
 \diag{
 	F(X) \arrow[d, "F(f)"] \arrow[r, "\mu X"] \& G(X) \arrow[d, "G(f)"] \\
 	F(Y) \arrow[r, "\mu Y"] \& G(Y)
 } 
 
-\section{Comma Categories}
+\section{Comma Categories} \label{comma_categories}
 Given two functors $F$ from $\cat{A}$ and $G$ from $\cat{B}$ sharing a common codomain $\cat{C}$, the comma category $(F \downarrow G)$ is defined as follows:
 \begin{itemize}
 	\item The objects are triples $(A, B, f)$ where $A \in \text{ob}(\cat{A})$, $B \in \text{ob}(\cat{B})$ and $F(A) \arr{f} G(B)$ is a morphism in $\cat{C}$. 
@@ -59,7 +59,7 @@ Given two functors $F$ from $\cat{A}$ and $G$ from $\cat{B}$ sharing a common co
 	\item Composition of morphisms is as you would expect. 
 \end{itemize}
 
-\section{Slice and Co-Slice Categories}
+\section{Slice and Co-Slice Categories} \label{slice_and_co-slice_categories}
 Given a category $\cat{C}$ and an object $A$ of that category, we can define the slice and co-slice categories $(\cat{C} \downarrow A)$ and $(A \downarrow \cat{C})$. These categories are defined as follows:
 \begin{itemize}
     \item An object of the slice (resp. co-slice) category is of the form $(B,f)$ for an object $B$ of $\cat{C}$ and a morphism $A \arr{f} B$ (resp. $B \arr{f} A$).
@@ -77,15 +77,15 @@ Given a category $\cat{C}$ and an object $A$ of that category, we can define the
     \item Composition is simply composition of underlying morphisms, i.e. $A \arr{g} B$ (resp. $B \arr{g} A$) in the example above.
 \end{itemize}
 
-\section{Full Subcategories}
+\section{Full Subcategories} \label{full_subcategories}
 If $\cat{C}$ is a category and $\cat{D}$ a subcategory of $\cat{C}$, then $\cat{D}$ is said to be a full subcategory if 
 $$\text{Hom}_\cat{D}(A,B) = \text{Hom}_\cat{C}(A,B)$$
 for all objects $A,B$ of $\cat{D}$.
 
-\section{Presheaf}
+\section{Presheaf} \label{presheaf}
 Assume $\cat{C}$ is small. A (set-valued) presheaf is a functor $F:\cat{C}^{op} \to \catt{Set}$.
 
-\section{Category of Cones and Limits}
+\section{Category of Cones and Limits} \label{category_of_cones_and_limits}
 Given a category $\cat{C}$ and a diagram $F: \cat{J} \to \cat{C}$, then the category of cones is $(\Delta \downarrow F)$ where $\Delta: \cat{C} \to \cat{C}^\cat{J}$ maps the object $X$ to the constant functor from $J$ to $X$ and $F$ represents the map from the terminal category, selecting simply $F$ in $\cat{C}^\cat{J}$. Now by definition, the objects will be the triples $(X, F, \mu)$ where $X$ is a constant functor from $J$ to some $X \in \text{ob}(\cat{C})$, $F$ is the diagram from before, and $\mu$ is a morphism between them in $\cat{C}^\cat{J}$ i.e. a natural transformation. Since the second componet of an object is always $F$, I will simply write $(X, \mu)$ from here on out. To visualize this cone object, consider the following diagram representing the natural transformation between $X$ and $F$:
 \diag{
 X
@@ -124,7 +124,7 @@ Now we see the underlying structure of the cone category; its objects represent 
 
 The result of this is that a limit of a diagram is just a terminal object in this category of cones. Which makes sense; if $(X, \mu)$ is a terminal object in this category, then it represents a commutative mapping of morphisms from $X$ to the diagram, through which every other object in $\cat{C}$ must uniquely factor (if there is some natural transformation from it to the diagram). 
 
-\section{Sheaves}
+\section{Sheaves} \label{sheaves}
 A sheaf, from a less general, more set-theoretic standpoint is a presheaf $F:\mathcal{O}(X)^\text{op} \to \catt{Set}$, where $(X, \mathcal{T})$ is some topological space, $\mathcal{O}(X)$ is the poset category of open sets in $X$ by subsets, with some specific properties, which we will cover shortly. In this less general case, the inclusion of $V$ in $U$ maps to a restriction map from $F(U)$ to $F(V)$, but we will generalize this later. Now we cover some important terminology and notation:
 \begin{itemize}
 	\item For an open set $U$, $F(U)$ is said to be the set of sections over $U$.
@@ -134,7 +134,7 @@ A sheaf, from a less general, more set-theoretic standpoint is a presheaf $F:\ma
 \end{itemize}
 Now a sheaf (under this definition) is a presheaf for which both sheaf axioms hold.
 
-\section{Sheaf Codomain Generalization}
+\section{Sheaf Codomain Generalization} \label{sheaf_codomain_generalization}
 Now we describe the two properties given in terms of sets in terms of categories, that way we can define sheaves with more general codomains, specifically any category that has small (set-indexed) products. Specifically, if we have an $A$ indexed family of open sets $U_\alpha \subset U$ for $\alpha \in A$ and $U$ is the colimit of the diagram $D$ containing all $U_\alpha$ with the following inclusions:
 \diag{
 	U_\beta \& \arrow[l] U_\beta \cap U_\delta \arrow[r]\& U_\delta 
@@ -156,8 +156,46 @@ Let $F: \mathcal{O}(X)^\text{op} \to \cat{D}$ be a contravariant functor from th
 F(U) \arrow[ur] \arrow[dr] \arrow[r, "e", densely dotted] \& \Pi_{\delta \in A} F(U_\delta) \arrow[r, shift left, densely dotted, "p"] \arrow[r, swap, shift right, densely dotted, "q"] \arrow[u] \arrow[d] \& \Pi_{\delta, \gamma \in A} F(U_\delta \cap U_\gamma) \arrow[d] \arrow[u]\\
 \& F(U_\beta) \arrow[r, "\rho_{U_\alpha \cap U_\beta}^{U_\beta}"]\& F(U_\alpha \cap U_\beta) 
 }
-\section{Hom-Functors and Representation}
+\section{Hom-Functors and Representation} \label{hom-functors_and_representation}
 Given a locally small category $\cat{C}$ and $c \in \text{ob}(\cat{C})$, then the covariant functor $\text{Hom}(c,-): \cat{C} \to \catt{Set}$ is called a hom-functor and takes $x \in \text{ob}(\cat{C})$ to the set $\text{Hom}(c, x)$ or the set of morphisms from $c$ to $x$. Each morphism $a \arr{f} b$ is mapped to the function $\text{Hom}(c,f) : \text{Hom}(c,a) \to \text{Hom}(c,b)$ having the effect $c \arr{h} a \mapsto c \arr{f \circ g} b$. The contravariant hom-functor $\text{Hom}(-, c): \cat{C}^\text{op} \to \catt{Set}$ is the dual of this notion.
 
 A covariant functor $F: \cat{C} \to \catt{Set}$ is said to be representable if there exists $c \in \text{op}(\cat{C})$ s.t. $\text{Hom}(c, -)$ is naturally isomorphic to $F$. If $F$ is contravariant then we require $F$ to be naturally isomorphic to $\text{Hom}(-,c)$.  
+\section{Symmetric Monoidal Categories} \label{symmetric_monoidal_categories}
+A category $\cat{V}$ is said to have symmetric monoidal structure if we have
+\begin{enumerate}
+	\item[(a)] A bifunctor $- \otimes -: \cat{V} \times \cat{V} \to \cat{V}$ known as the monoidal product.
+	\item[(b)] A unit object $I \in \text{ob}(\cat{V})$ known as the monoidal unit.
+\end{enumerate}
+We require the following symmetric monoidal axioms, given by shortened natural isomorphisms:
+\begin{itemize}
+	\item $v \otimes w \cong w \otimes v$ i.e. the functor given by the right $\otimes$ product with some fixed object $w$ is naturally isomorphic to that given by the left product with $w$.
+	\item $(u \otimes v) \otimes w \cong u \otimes (v \otimes w)$ i.e. both orders of composition of the functor given by left product with some fixed $u$ and the functor given by the right product with some fixed $w$ are naturally isomorphic.
+	\item $v \otimes I \cong v \cong I \otimes v$ i.e. the functors given by right and left product with $I$ resp. are both naturally isomorphic to the identity functor on $\cat{V}$.
+\end{itemize}
+We denote this structure as $(\cat{V}, \otimes, I)$. Without the 1st axiom of commutativity, we call the structure a monoidal category. If instead the axioms are given with equality, the monoidal structure is said to be strict.\\
+If $\cat{V}$ admits at most one morphism between any two objects, then it is called a symmetric monoidal preorder. Examples thereof are $\cat{2} = (\{0,1\},\leq, 1, \land)$ and $(\mathcal{P}(S), \subset, S, \cap)$ for a set $S$. \\
+Given such a $(\cat{V}, \leq, I, \otimes)$, a $\cat{V}$-category $\cat{X}$ is s.t. 
+\begin{itemize}
+	\item For $x,y \in \text{ob}(\cat{X})$, $\cat{X}(x,y) = v$ for some $v \in \cat{V}$, known as the hom-object.
+	\item For all $x \in \text{ob}(\cat{X})$, $I \leq \cat{X}(x, x)$.
+	\item For $x,y,z \in \text{ob}(\cat{X})$, $\cat{X}(x,y) \otimes \cat{X}(y,z) \leq \cat{X}(x,z)$.
+\end{itemize}
+We say $\cat{X}$ is enriched in $\cat{V}$.
+\section{Some Order Theory Definitions} \label{some_order_theory_definitions}
+Let a poset $\cat{P} = (P, \leq)$. A subset $A \subset P$ is a downset if for each $p \in A$ and $q \in P$, $q \leq p \Rightarrow q \in A$. A subset $U \subset P$ is called an upper set if $p \in U, p \leq q$ implies $q \in U$. For $p \in P$, let $\downarrow p = \{q \in P \mid q \leq p\}$ and $\uparrow p = \{q \in P \mid p \leq q\}$. Let the category $\catt{Down}(\cat{P})$ be the poset given by the set of downsets of $\cat{P}$ and relation of subset inclusion. \\
+Let $D$ be a downset of $\cat{P}$, then being by set-structure $D$ is defined by the choice of inclusion of $d \in P$, i.e. $D \cong \phi:P \to \{0,1\}$ (for lack of better symbols), but for it to be a downset we need $x \leq y$ to imply that $x$'s inclusion in $D$ is at least as true as the inclusion of $y$ in $D$, thus we kind of have this antitonic structure $x \leq y \Rightarrow \phi(y) \leq \phi(x)$, so we see each downset of $\cat{P}$ is an contravariant functor $\cat{P} \to \cat{2}$, so we have the mapping
+$$\catt{Down}(\cat{P}) \mapsto \cat{2}^{\cat{P}^\text{op}}$$
+Let $\rho \in \cat{2}^{\cat{P}^\text{op}}$, then it provides exactly one set $G$ and this is in fact a downset, so we can strengthen our statement to
+$$\catt{Down}(\cat{P}) \cong \cat{2}^{\cat{P}^\text{op}}$$
+Furthermore, by transitivity we see that $x < y$ yields $\downarrow x \subset \downarrow y$, so that $\downarrow (-): \cat{P} \to \catt{Down}(\cat{P})$ is a functor. \\
+The following statements are special cases of the Yoneda lemma:
+\begin{itemize}
+	\item Given $\cat{P}$ a poset, $x \in \text{ob}(\cat{P})$, $A \in \text{ob}(\catt{Down}(\cat{P}))$, then
+	$$x \in A \iff \downarrow x \subset A$$
+	\item For the same hypothesis, $\downarrow (-): \cat{P} \to \catt{Down}(\cat{P})$ is an injective functor.
+\end{itemize}
+Proofs are fairly trivial.\\
+We can think of downsets as the $\cat{2}$ presheaves on $\cat{P}$. To continue recall section \ref{hom-functors_and_representation}.
+
+
 \end{document}
