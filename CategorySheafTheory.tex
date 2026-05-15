@@ -197,5 +197,26 @@ The following statements are special cases of the Yoneda lemma:
 Proofs are fairly trivial.\\
 We can think of downsets as the $\cat{2}$ presheaves on $\cat{P}$. To continue recall section \ref{hom-functors_and_representation}.
 
+\section{Direct Product} \label{direct_product}
+For a family $\{(A_\alpha, +_\alpha)\}_{\alpha \in I}$ of vector spaces, abelian groups $A_\alpha$, etc. with the commutative operation $+_\alpha$ the direct sum $\otimes_{\alpha \in I} A_\alpha$ is defined as the set of tuples $(a_\alpha)_{\alpha \in I}$ where each component $a_\alpha \in A_\alpha$ and if $(b_\alpha)_\{\alpha \in I\}$ is another such tuple, then their sum
+$$ (a_\alpha)_{\alpha \in I} + (b_\alpha)_\{\alpha \in I\} = (a_\alpha +_\alpha b_\alpha)_{\alpha \in I}$$
 
+\section{Cellular Sheaves} \label{\cellular_sheaves}
+A cellular sheaf $F$ on a simplicial complex $X$ consists of the following:
+\begin{itemize}
+    \item The face or boundary relation that $\delta$ is a subsimplex of $\tau$ is $\delta \leq \tau$. 
+    \item Each simplex $\delta$ receives a vector space $F(\delta)$ and $F$ acts functorially on the face morphism 
+     $$\delta \leq \tau \mapsto F(\delta \leq \tau): F(\delta) \to F(\tau)$$
+    where $F(\delta \leq \tau)$ is a linear mapping from $F(\delta)$ to $F(\tau)$. 
+\end{itemize}
+We write $F(\delta \leq \tau) = F_{\delta \leq \tau}$. (Wei et al. also give the axioms $\rho \leq \delta \leq \tau \Rightarrow F_{\rho \leq \tau} = F_{\delta \leq \tau} \circ F_{\rho \leq \delta}$ and $F_{\delta \leq \delta} = \text{id}_{F(\delta)}$, but these are both necessary for functoriality).\\
+
+\section{Cellular Pullback Sheaves} \label{cellular_pullback_sheaves}
+If $f:X \to Y$ is a simplicial map and $F$ is a cellular sheaf on $Y$, then the pullback sheaf $f^* F$ is given by
+$$(f^* F)(\delta) = F(f(\delta))$$
+and for the face relation $\delta \leq \tau$
+$$(f^* F)_{\delta \leq \tau} = F_{f(\delta) \leq f(\tau)}$$
+
+\section{Cellular Sheaf Cohomology} \label{cell_sheaf_cohomology}
+Let $F$ be a sheaf on a simplicial complex $X$ then 
 \end{document}
