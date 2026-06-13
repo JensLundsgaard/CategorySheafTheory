@@ -2,7 +2,6 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{tikz-cd}
 \usepackage{hyperref}
 
 \title{Algebraic Topology}
@@ -12,5 +11,25 @@
 \begin{document}
 
 \maketitle
+\section{Boundary Operator} \label{boundary}
+Let $X$ be a space and $Y \subset X$ a subset. The set $\partial_X Y$ is defined as
+$$\overline{Y} - Y^\circ$$
+where the closure and interior are taken with repsect to space $X$, and this is known as the boundary of $Y$. I may write $\partial Y$ if the ambient space was explicitly stated or where it could cause no confusion.
 
+For spaces $X,Y$, $A \subset X$, $B \subset Y$, we have the following identity:
+$$\partial(A \times B) = A \times \partial_Y B \cup \partial_X A \times B$$
+Proof: TODO. Of particular interest is that this is of the same form as the product rule in calculus.
+
+\section{Discs and Spheres} \label{discs_spheres}
+Let $D^n$ be the equivalence class (when not stated explicitly, assume the equivalence relation to be homeomorphicness) of a closed ball in $\mathbb{R}^n$. Then $S^{n-1} = \partial D^n$.
+
+\section{Cell Complexes} \label{cell_complexes}
+Let the set $X^0$ be known as the $0$-skeleton and be a set of points. For $n > 0$,
+$$X^n = (\{D_i^n\},\phi)$$
+where $\{D_n^n\}$ is some set of $n$-discs and $\phi:S^{n-1} \to X^{n-1}$ maps the boundary of then $n$-skeleton to the $n-1$-skeleton.
+
+\section{Euler Characteristic} \label{euler_characteristic}
+The Euler characteristic $\chi X$ of the space $X$ given by the cell complex $(X^0, X^1,...X^n)$ is defined to be
+$$\sum_{i=0}^n (-1)^i \vert X^i \vert$$
+where $\vert X^i \vert$ is the number of $i$-discs in the $i$-skeleton. If $X \cong Y$, then $\chi X = \chi Y$, proof: TODO.
 \end{document}
