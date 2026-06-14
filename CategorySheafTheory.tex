@@ -218,5 +218,24 @@ and for the face relation $\delta \leq \tau$
 $$(f^* F)_{\delta \leq \tau} = F_{f(\delta) \leq f(\tau)}$$
 
 \section{Cellular Sheaf Cohomology} \label{cell_sheaf_cohomology}
-Let $F$ be a sheaf on a simplicial complex $X$ then 
+Let $F$ be a sheaf on a simplicial complex $X$ then  TODO finish this.
+
+\section{Monads} \label{monads}
+Let a category $\cat{C}$, then a monad is the triple
+$$(T, \eta, \mu)$$
+where
+$$T: \cat{C} \to \cat{C} \text{ is an endofunctor}$$
+$$\text{id}_\cat{C} \arr{\eta} T \text{ is a natural transformation from the identity on $\cat{C}$ to $T$}$$
+$$T \circ T \arr{\mu} T \text{ is a natural transformation}$$
+and making the following diagram commute: 
+\diag{
+\& T(T(T(X))) \arrow[r, "T(\mu X)"] \arrow[d, "\mu T(X)"]\& T(T(X)) \arrow[d, "\mu X"] \\
+\& T(T(X)) \arrow[r, "\mu X"]\& T(X)
+}
+and
+\diag{
+\& T(X) \arrow[r, "T(\mu X)"] \arrow[d, "\mu T(X)"]\& T(T(X)) \arrow[d, "\mu X"] \\
+\& T(T(X)) \arrow[r, "\mu X"]\& T(X)
+}
+for all $X \in \text{ob}(\cat{C})$
 \end{document}
