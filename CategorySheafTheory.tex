@@ -220,6 +220,23 @@ $$(f^* F)_{\delta \leq \tau} = F_{f(\delta) \leq f(\tau)}$$
 \section{Cellular Sheaf Cohomology} \label{cell_sheaf_cohomology}
 Let $F$ be a sheaf on a simplicial complex $X$ then  TODO finish this.
 
+\section{Monoid Object in a Monoidal Category} \label{monoid_object}
+Let a monoidal category $(\cat{C}, \otimes, I)$ then the tuple $(M,\eta, \mu)$ where 
+$$M \in \text{ob}(\cat{C})$$
+$$M \otimes M \arr{\mu} M$$
+$$I \arr{\eta} M$$
+Satisfying
+\diag{
+\& (M \otimes M) \otimes M \arrow[r, "\alpha"] \arrow[d, ""]\& M \otimes (M \otimes M) \arrow[r, "\text{id}_{M} \otimes \mu"] \& M \otimes M \arrow[d, "\mu"] \\
+\& M \otimes M \arrow[r, "\mu X"]\& T(X)
+}
+
+\diag{
+\& T(X) \arrow[r, "\eta T(X)"] \arrow[rd, equal] \arrow[d, "T (\eta X)"]\& T(T(X)) \arrow[d, "\mu X"] \\
+\& T(T(X)) \arrow[r, "\mu X"]\& T(X)
+}
+
+
 \section{Monads} \label{monads}
 Let a category $\cat{C}$, then a monad is the triple
 $$(T, \eta, \mu)$$
